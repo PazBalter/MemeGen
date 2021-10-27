@@ -14,7 +14,7 @@ function renderGalery(){
     console.log(galery[3].url)
     for(var i=0; i < galery.length ; i++){
         strInnerHtml += `<div class="box" onclick="setImgId(${i})">
-                            <img src="../${galery[i].url}">
+                            <img src="${galery[i].url}">
                         </div>`
     }
     wrapper.innerHTML = strInnerHtml;
