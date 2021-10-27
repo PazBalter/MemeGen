@@ -26,3 +26,20 @@ h1{
 #meme-canvas{
 border:solid 1px black;
 }
+
+/* tools */
+
+.text-inputs{
+    background-color: brown;
+    width: 600px;
+    height: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* helpers */
+
+.flex{
+    display: flex;
+    text-align: center;
+}
