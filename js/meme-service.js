@@ -1,14 +1,80 @@
 'use strict'
+// Globals //
+var gKeywords = {'happy':0,
+                 'crazy':0,
+                 'sarcastic':0,
+                 'sad':0,
+}
+
+var gImgs = [
+    {id: 1, url: 'img-squareMeme/1.jpg', keywords: ['happy']},
+    {id: 2, url: 'img-squareMeme/2.jpg', keywords: ['happy']},
+    {id: 3, url: 'img-squareMeme/3.jpg', keywords: ['happy']},
+    {id: 4, url: 'img-squareMeme/4.jpg', keywords: ['happy']},
+    {id: 5, url: 'img-squareMeme/5.jpg', keywords: ['happy']},
+    {id: 6, url: 'img-squareMeme/6.jpg', keywords: ['happy']},
+    {id: 7, url: 'img-squareMeme/7.jpg', keywords: ['happy']},
+    {id: 8, url: 'img-squareMeme/8.jpg', keywords: ['happy']},
+    {id: 9, url: 'img-squareMeme/9.jpg', keywords: ['happy']},
+    {id: 10, url: 'img-squareMeme/10.jpg', keywords: ['happy']},
+    {id: 11, url: 'img-squareMeme/11.jpg', keywords: ['happy']},
+    {id: 12, url: 'img-squareMeme/12.jpg', keywords: ['happy']},
+    {id: 13, url: 'img-squareMeme/13.jpg', keywords: ['happy']},
+    {id: 14, url: 'img-squareMeme/14.jpg', keywords: ['happy']},
+    {id: 15, url: 'img-squareMeme/15.jpg', keywords: ['happy']},
+    {id: 16, url: 'img-squareMeme/16.jpg', keywords: ['happy']},
+    {id: 17, url: 'img-squareMeme/17.jpg', keywords: ['happy']},
+    {id: 18, url: 'img-squareMeme/18.jpg', keywords: ['happy']}
+];
+
+var gMeme = {
+    selectedImgId: 0,
+    selectedLineIdx: 0,
+    lines: [
+        { 
+            txt: 'never eat Falafel',
+            size: 20,
+            align: 'left', 
+            color: 'red' 
+        } 
+    ] 
+}
 
 const topTextInput = document.querySelector('.topTextInput')
 const bottomTextInput = document.querySelector('.bottomTextInput')
 const elCanvas = document.querySelector('#meme-canvas')
 
+
+//  getters 
+function getAllImages(){
+    return gImgs;
+}
 function getImgSrc(){
     var img = gImgs[gMeme.selectedImgId]
     return img.url;
 }
+function getMemeText(){
+    var txt = gMeme.lines.text 
+    return txt;
+}
+// setters
 
+
+function setImgId(numId){
+    gMeme.selectedImgId = numId
+    insertImgToCanvas()
+}
+
+// meme functions 
+
+function insertImgToCanvas(){
+    var img = new Image()
+        img.src = getImgSrc()
+    var ctx = elCanvas.getContext("2d");
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0, elCanvas.width, elCanvas.height) 
+    }
+}
 
 topTextInput.addEventListener("change", () =>{
     updateMemeCanvas(elCanvas, topTextInput.value,bottomTextInput.value) // image value
@@ -16,9 +82,6 @@ topTextInput.addEventListener("change", () =>{
 bottomTextInput.addEventListener("change", () =>{
     updateMemeCanvas(elCanvas, topTextInput.value,bottomTextInput.value) // image value
 });
-
-
-
 
 
 function updateMemeCanvas(elCanvas,topText,bottomText){  // image value
@@ -30,7 +93,7 @@ function updateMemeCanvas(elCanvas,topText,bottomText){  // image value
     var yOffset = height/25;
     console.log(fontSize)
 
-    // update canvas img
+     // update canvas img
     // insertImgToCanvas()
 
     // prepare text
@@ -56,21 +119,12 @@ function updateMemeCanvas(elCanvas,topText,bottomText){  // image value
 
 
 
-function insertImgToCanvas(){
-    var img = new Image()
-        img.src = getImgSrc()
-    var canvas = document.querySelector("canvas");
-    var ctx = canvas.getContext("2d");
-    img.onload = () => {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height) 
-    }
-}
 
-function drawText(text, x, y) {
-    gCtx.lineWidth = 2;
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = 'white';
-    gCtx.font = '30px  meme';
-    gCtx.fillText(text, x, y);
-    gCtx.strokeText(text, x, y);
-  }
+// function drawText(text, x, y) {
+//     gCtx.lineWidth = 2;
+//     gCtx.strokeStyle = 'black';
+//     gCtx.fillStyle = 'white';
+//     gCtx.font = '30px  meme';
+//     gCtx.fillText(text, x, y);
+//     gCtx.strokeText(text, x, y);
+// }
