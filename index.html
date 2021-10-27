@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meme Generator</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="/css/helpers.css">
 
 </head>
-<body>
-    
+<body onload="init()">
+    <header>
+        <div class="header-container">
+            <h1>MeMeGeN</h1>
+        </div>
+    </header>
+    <div class="canvas-containar">
+        <canvas id="meme-canvas" height="600" width="600">
+        </canvas>
+    </div>
 
 
     <script src="js/storage-service.js"></script>
     <script src="js/util-service.js"></script>
     <script src="js/main.js"></script>
-    <script src=""></script>
+    <script src="js/meme-service.js"></script>
 </body>
 </html>
