@@ -1,5 +1,6 @@
 'use strict'
 // Globals //
+
 const elCanvas = document.querySelector('#meme-canvas');
 const gCtx = elCanvas.getContext("2d");
 const topTextInput = document.querySelector('.topTextInput');
@@ -50,16 +51,13 @@ var gMeme = {
     ] 
 }
 
-
-
-
 //  getters
 
-function getTopLine(){
-    return gMeme.lines[0].txt
+function getIdxOfLine(){
+    return gMeme.selectedLineIdx;
 }
-function getBottomLine(){
-    return gMeme.lines[1].txt
+function getLine(idx){
+    return gMeme.lines[idx].txt
 }
 function getAllImages(){
     return gImgs;
@@ -68,27 +66,26 @@ function getImgSrc(){
     var img = gImgs[gMeme.selectedImgId]
     return img.url;
 }
-function getMemeText(){
-    var txt = gMeme.lines.text 
-    return txt;
+function getFontSize(){
+    return gMeme.lines[getIdxOfLine()].size;
 }
+
 
 // setters
-
-function setTopLine(line){
-    gMeme.lines[0].txt = line
+function setIdxOfLine(idx){
+    gMeme.selectedLineIdx = idx;
+}
+function setLine(line){
+    gMeme.lines[getIdxOfLine()].txt = line
 }
 function setBottomLine(line){
-    gMeme.lines[1].txt = line
+    gMeme.lines[getIdxOfLine()].txt = line
 }
-function rateFontSize(diff){
-    // debugger;
-    gFontSize += diff;
+function setFontSize(diff){
+    gMeme.lines[getIdxOfLine()].size += diff;
     updateMemeCanvas()
 }
-function setFontSize() {
-    gFontSize = Math.floor(elCanvas.width/10)
-}
+
 
 
 function setImgId(numId){
@@ -98,16 +95,12 @@ function setImgId(numId){
 
 // meme functions 
 function switchLines(){
-    var line = getTopLine()
-    setTopLine(getBottomLine())
-    setBottomLine(line)
-    updateMemeCanvas()
+   
 }
 
 function insertImgToCanvas(){
     var img = new Image()
         img.src = getImgSrc()
-    // var gCtx = elCanvas.getContext("2d");
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, elCanvas.width, elCanvas.height) 
     }
@@ -116,11 +109,13 @@ function insertImgToCanvas(){
 // inputs
 
 topTextInput.addEventListener("change", () =>{
-    setTopLine(topTextInput.value)
+    setIdxOfLine(0)
+    setLine(topTextInput.value,)
     updateMemeCanvas() 
 });
 bottomTextInput.addEventListener("change", () =>{
-    setBottomLine(bottomTextInput.value)
+    setIdxOfLine(1)
+    setLine(bottomTextInput.value)
     updateMemeCanvas() 
 });
 
@@ -140,9 +135,8 @@ function updateMemeCanvas(){
     imageObj.onload = function(){
     gCtx.drawImage(imageObj, 0, 0, elCanvas.width, elCanvas.height) 
 
-        for(var i = 0; i < gMeme.lines.length ; i++){
-        // prepare text
-        console.log(gMeme.lines[i].size)
+    // prepare text
+        for(var i = 0 ; i< gMeme.lines.length ; i++){
             var fontSize = gMeme.lines[i].size
             gCtx.strokeStyle = 'black';
             gCtx.lineWidth = Math.floor(fontSize/4);
@@ -151,23 +145,22 @@ function updateMemeCanvas(){
             gCtx.lineJoin = "round";
             gCtx.font = `${fontSize}px meme`
 
-
             if(i === 0){
                 // add top text
                 gCtx.textBaseline = 'top'
-                gCtx.strokeText(getTopLine(),width/2,yOffset)
-                gCtx.fillText(getTopLine(),width/2,yOffset)
+                gCtx.strokeText(getLine(i),width/2,yOffset)
+                gCtx.fillText(getLine(i),width/2,yOffset)
             }else if(i === 1){
                 // add bottom text
                 gCtx.textBaseline = 'bottom'
-                gCtx.strokeText(getBottomLine(),width/2,height - yOffset)
-                gCtx.fillText(getBottomLine(),width/2,height - yOffset)
+                gCtx.strokeText(getLine(i),width/2,height - yOffset)
+                gCtx.fillText(getLine(i),width/2,height - yOffset)
             }
             else{
                 // todo
                 gCtx.textBaseline = 'center'
-                gCtx.strokeText(getBottomLine(),width/2,height - yOffset)
-                gCtx.fillText(getBottomLine(),width/2,height - yOffset)  
+                gCtx.strokeText(getLine(i),width/2,height - yOffset)
+                gCtx.fillText(getLine(i),width/2,height - yOffset)  
             }
         }
     }
