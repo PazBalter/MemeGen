@@ -11,39 +11,59 @@
 </head>
 <body onload="init()">
 
-    <header>
-        <div class="header-container">
+    <header class="header flex-and-space">
+        <div class="logo">
             <h1>MeMeGeN</h1>
         </div>
+        <nav class="nav-bar">
+                <ul class="menu-list flex clean-list">
+                    <li onclick="showGallery()">Gallery</li>
+                    <li onclick="showMemesEditor()">Memes</li>
+                    <li onclick="showAboutinfo()">About</li>
+                </ul>
+        </nav>
     </header>
 
 
+    <main class="main-layout">
 
-    <div class="galery-holder">
+    <div class="gallery-holder">
         <div class="images-wrapper">
         </div>
     </div>
 
     <div class="meme-generator">
+
+        <div class="canvas-containar">
+            <canvas id="meme-canvas" height="400" width="400"></canvas>
+        </div>
+
         <div class="text-inputs">
             <label>Top Text:</label>
             <input type="text" class="topTextInput">
             <label>Bottom Text:</label>
             <input type="text" class="bottomTextInput">
         </div>
-        <div class="tools-btn">
-            <button class="increase"></button>
-            <button class="decrease"></button>
+        
+        <div class="tools-btns">
+            <button class="font-btn" onclick="rateFontSize(1)">+</button>
+            <button class="font-btn" onclick="rateFontSize(-1)">-</button>
         </div>
-        <div class="canvas-containar">
-            <canvas id="meme-canvas" height="600" width="600">
-            </canvas>
-        </div>
+
+    </div>
+    
+    <div class="share-menu" hidden>
+        <ul>
+            <li>save</li>
+            <li>download</li>
+            <li>share</li>
+        </ul>
     </div>
 
+    <main>
 
  
-
+    <footer></footer>
 
     <script src="js/storage-service.js"></script>
     <script src="js/util-service.js"></script>

@@ -1,6 +1,7 @@
 'use strict'
 
 function init(){
-    insertImgToCanvas()
+    // insertImgToCanvas()
     renderGalery()
+    
 }
