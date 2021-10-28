@@ -14,7 +14,7 @@ function renderGalery(){
 
     console.log(galery[3].url)
     for(var i=0; i < galery.length ; i++){
-        strInnerHtml += `<div class="box" onclick="setImgId(${i})">
+        strInnerHtml += `<div class="box" onclick="setImgIdAndGoToMeme(${i})">
                             <img src="${galery[i].url}">
                         </div>`
     }
@@ -39,4 +39,12 @@ function showMemesEditor(){
 }
 function showAboutinfo(){
     console.log('fun')
+}
+function setImgIdAndGoToMeme(numId){
+    var gallery = document.querySelector('.gallery-holder')
+    var memeGen = document.querySelector('.meme-generator')
+    gallery.style.display = 'none';
+    memeGen.style.display = 'block'; 
+    gMeme.selectedImgId = numId
+    insertImgToCanvas()
 }

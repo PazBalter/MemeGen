@@ -1,7 +1,6 @@
 'use strict'
 
 function init(){
-    // insertImgToCanvas()
+    updateMemeCanvas()
     renderGalery()
-    
 }

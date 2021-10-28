@@ -1,10 +1,14 @@
 'use strict'
 // Globals //
-var gKeywords = {'happy':0,
-                 'crazy':0,
-                 'sarcastic':0,
-                 'sad':0,
-}
+const elCanvas = document.querySelector('#meme-canvas');
+const gCtx = elCanvas.getContext("2d");
+const topTextInput = document.querySelector('.topTextInput');
+const bottomTextInput = document.querySelector('.bottomTextInput');
+const fontButtons = document.querySelectorAll('.font-btn');
+
+var gFontSize = Math.floor(elCanvas.width/10)
+
+var gKeywords = {'happy':0,'crazy':0,'sarcastic':0,'sad':0,}
 
 var gImgs = [
     {id: 1, url: 'img-square-meme/1.jpg', keywords: ['happy']},
@@ -33,24 +37,30 @@ var gMeme = {
     lines: [
         { 
             txt: 'never eat Falafel',
-            size: 20,
-            align: 'left', 
-            color: 'red' 
-        } 
+            size: gFontSize,
+            align: 'center', 
+            color: 'white' 
+        },
+        { 
+            txt: 'Without tahin',
+            size: gFontSize,
+            align: 'center', 
+            color: 'white' 
+        }
     ] 
 }
 
-const elCanvas = document.querySelector('#meme-canvas')
-const gCtx = elCanvas.getContext("2d");
-const topTextInput = document.querySelector('.topTextInput')
-const bottomTextInput = document.querySelector('.bottomTextInput')
-const fontButtons = document.querySelectorAll('.font-btn')
 
 
-var gFontSize = Math.floor(elCanvas.width/10)
 
+//  getters
 
-//  getters 
+function getTopLine(){
+    return gMeme.lines[0].txt
+}
+function getBottomLine(){
+    return gMeme.lines[1].txt
+}
 function getAllImages(){
     return gImgs;
 }
@@ -62,13 +72,24 @@ function getMemeText(){
     var txt = gMeme.lines.text 
     return txt;
 }
+
 // setters
+
+function setTopLine(line){
+    gMeme.lines[0].txt = line
+}
+function setBottomLine(line){
+    gMeme.lines[1].txt = line
+}
 function rateFontSize(diff){
-    gFontSize + diff;
+    // debugger;
+    gFontSize += diff;
+    updateMemeCanvas()
 }
 function setFontSize() {
     gFontSize = Math.floor(elCanvas.width/10)
 }
+
 
 function setImgId(numId){
     gMeme.selectedImgId = numId
@@ -76,6 +97,12 @@ function setImgId(numId){
 }
 
 // meme functions 
+function switchLines(){
+    var line = getTopLine()
+    setTopLine(getBottomLine())
+    setBottomLine(line)
+    updateMemeCanvas()
+}
 
 function insertImgToCanvas(){
     var img = new Image()
@@ -86,19 +113,23 @@ function insertImgToCanvas(){
     }
 }
 
+// inputs
+
 topTextInput.addEventListener("change", () =>{
-    updateMemeCanvas(elCanvas, topTextInput.value,bottomTextInput.value) // image value
+    setTopLine(topTextInput.value)
+    updateMemeCanvas() 
 });
 bottomTextInput.addEventListener("change", () =>{
-    updateMemeCanvas(elCanvas, topTextInput.value,bottomTextInput.value) // image value
+    setBottomLine(bottomTextInput.value)
+    updateMemeCanvas() 
 });
-// fontButtons.addEventListener("change", () =>{
-//     updateMemeCanvas(elCanvas, topTextInput.value,bottomTextInput.value) // image value
-// });
+
+// buttons
 
 
-function updateMemeCanvas(elCanvas,topText,bottomText){  // image value
-    var fontSize = gFontSize
+
+function updateMemeCanvas(){ 
+    
     var width = elCanvas.width
     var height = elCanvas.height
     var yOffset = height/25;
@@ -107,37 +138,40 @@ function updateMemeCanvas(elCanvas,topText,bottomText){  // image value
     var imageObj = new Image();
     imageObj.src = getImgSrc();
     imageObj.onload = function(){
-        gCtx.drawImage(imageObj, 0, 0, elCanvas.width, elCanvas.height) 
-    
+    gCtx.drawImage(imageObj, 0, 0, elCanvas.width, elCanvas.height) 
 
+        for(var i = 0; i < gMeme.lines.length ; i++){
         // prepare text
-        gCtx.strokeStyle = 'black';
-        gCtx.lineWidth = Math.floor(fontSize/4);
-        gCtx.fillStyle = 'white';
-        gCtx.textAlign = 'center';
-        gCtx.lineJoin = "round";
-        gCtx.font = `${fontSize}px meme`
+        console.log(gMeme.lines[i].size)
+            var fontSize = gMeme.lines[i].size
+            gCtx.strokeStyle = 'black';
+            gCtx.lineWidth = Math.floor(fontSize/4);
+            gCtx.fillStyle = gMeme.lines[i].color;
+            gCtx.textAlign = gMeme.lines[i].align;
+            gCtx.lineJoin = "round";
+            gCtx.font = `${fontSize}px meme`
 
-        // add top text
 
-        gCtx.textBaseline = 'top'
-        gCtx.strokeText(topText,width/2,yOffset)
-        gCtx.fillText(topText,width/2,yOffset)
-
-        // add bottom text
-
-        gCtx.textBaseline = 'bottom'
-        gCtx.strokeText(bottomText,width/2,height - yOffset)
-        gCtx.fillText(bottomText,width/2,height - yOffset)
+            if(i === 0){
+                // add top text
+                gCtx.textBaseline = 'top'
+                gCtx.strokeText(getTopLine(),width/2,yOffset)
+                gCtx.fillText(getTopLine(),width/2,yOffset)
+            }else if(i === 1){
+                // add bottom text
+                gCtx.textBaseline = 'bottom'
+                gCtx.strokeText(getBottomLine(),width/2,height - yOffset)
+                gCtx.fillText(getBottomLine(),width/2,height - yOffset)
+            }
+            else{
+                // todo
+                gCtx.textBaseline = 'center'
+                gCtx.strokeText(getBottomLine(),width/2,height - yOffset)
+                gCtx.fillText(getBottomLine(),width/2,height - yOffset)  
+            }
+        }
     }
 }
 
-function draw(){
-    var width = elCanvas.width
-    var height = elCanvas.height
-    gCtx.clearRect(0,0,width,height)
 
-    gCtx.fillText = 'white'
-    insertImgToCanvas()
-}
 
