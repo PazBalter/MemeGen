@@ -4,13 +4,25 @@
 const gElImageWarper = document.querySelector('.images-wrapper')
 const gElGallery = document.querySelector('.gallery-holde')
 const gElMemeGen = document.querySelector('.meme-generator')
+const gLinesAdder = document.querySelector('.lines-adder')
+var gNumLine = 0
 // const gElInfo = document.querySelector('') // finish
 
 
+
+function renderAddedLines(){
+    return;  // not finished
+    gNumLine++
+    var newLine = gLinesAdder
+    var strInnerHtml = `<label>Line ${gNumLine} :</label>
+    <input type="text" class="centerTextInput">`
+    newLine.innerHTML += strInnerHtml;
+    createMoreLine()
+}
 function renderGalery(){
     var galery = getAllImages();
     var wrapper = gElImageWarper;
-    var strInnerHtml = ' ';
+    var strInnerHtml = '';
 
     console.log(galery[3].url)
     for(var i=0; i < galery.length ; i++){
@@ -35,9 +47,8 @@ function showMemesEditor(){
     var memeGen = document.querySelector('.meme-generator')
     gallery.style.display = 'none';
     memeGen.style.display = 'block'; 
-
 }
-function showAboutinfo(){
+function showAboutInfo(){
     console.log('fun')
 }
 function setImgIdAndGoToMeme(numId){

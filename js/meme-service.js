@@ -7,6 +7,7 @@ const topTextInput = document.querySelector('.topTextInput');
 const bottomTextInput = document.querySelector('.bottomTextInput');
 const fontButtons = document.querySelectorAll('.font-btn');
 
+
 var gFontSize = Math.floor(elCanvas.width/10)
 
 var gKeywords = {'happy':0,'crazy':0,'sarcastic':0,'sad':0,}
@@ -43,7 +44,7 @@ var gMeme = {
             color: 'white' 
         },
         { 
-            txt: 'Without tahin',
+            txt: 'Without tahini',
             size: gFontSize,
             align: 'center', 
             color: 'white' 
@@ -70,7 +71,6 @@ function getFontSize(){
     return gMeme.lines[getIdxOfLine()].size;
 }
 
-
 // setters
 function setIdxOfLine(idx){
     gMeme.selectedLineIdx = idx;
@@ -85,18 +85,50 @@ function setFontSize(diff){
     gMeme.lines[getIdxOfLine()].size += diff;
     updateMemeCanvas()
 }
-
-
-
 function setImgId(numId){
     gMeme.selectedImgId = numId
     insertImgToCanvas()
 }
-
-// meme functions 
-function switchLines(){
-   
+function createMoreLine(){
+    gMeme.lines.push({ 
+        txt: 'new line',
+        size: gFontSize,
+        align: 'center', 
+        color: 'white' 
+    })
 }
+// btn functions
+
+function switchLines(){
+    var idx = getIdxOfLine()
+    idx++;
+    if(idx === gMeme.lines.length){
+        setIdxOfLine(0)
+    }else{
+        setIdxOfLine(idx) 
+    }
+}
+
+function deleteLine(){
+    var line=''
+    setLine(line)
+    updateMemeCanvas()
+}
+// inputs
+
+topTextInput.addEventListener("change", () =>{
+    setIdxOfLine(0)
+    setLine(topTextInput.value)
+    updateMemeCanvas() 
+});
+bottomTextInput.addEventListener("change", () =>{
+    setIdxOfLine(1)
+    setLine(bottomTextInput.value)
+    updateMemeCanvas() 
+});
+
+
+
 
 function insertImgToCanvas(){
     var img = new Image()
@@ -106,25 +138,7 @@ function insertImgToCanvas(){
     }
 }
 
-// inputs
-
-topTextInput.addEventListener("change", () =>{
-    setIdxOfLine(0)
-    setLine(topTextInput.value,)
-    updateMemeCanvas() 
-});
-bottomTextInput.addEventListener("change", () =>{
-    setIdxOfLine(1)
-    setLine(bottomTextInput.value)
-    updateMemeCanvas() 
-});
-
-// buttons
-
-
-
 function updateMemeCanvas(){ 
-    
     var width = elCanvas.width
     var height = elCanvas.height
     var yOffset = height/25;

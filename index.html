@@ -37,18 +37,26 @@
         <div class="canvas-containar">
             <canvas id="meme-canvas" height="400" width="400"></canvas>
         </div>
+        <div class="control-box">
 
-        <div class="text-inputs">
-            <label>Top Text:</label>
-            <input type="text" class="topTextInput">
-            <label>Bottom Text:</label>
-            <input type="text" class="bottomTextInput">
-        </div>
-        
-        <div class="tools-btns">
-            <button class="font-btn" onclick="setFontSize(2)">+</button>
-            <button class="font-btn" onclick="setFontSize(-2)">-</button>
-            <button class="font-btn" onclick="switchLines()">↑↓</button>
+            <div class="text-inputs">
+                <label>Top Text:</label>
+                <input type="text" class="topTextInput">
+                <div class="lines-adder">
+
+                </div>
+                <label>Bottom Text:</label>
+                <input type="text" class="bottomTextInput">
+            </div>
+            
+            <div class="tools-btns">
+                <button class="font-btn" onclick="setFontSize(2)">+</button>
+                <button class="font-btn" onclick="setFontSize(-2)">-</button>
+                <button class="switch-btn" onclick="switchLines()">↑↓</button>
+                <button class="delete-btn" onclick="deleteLine()">delete</button>
+                <button class="add-btn" onclick="renderAddedLines()">+line</button>
+            </div>
+
         </div>
 
     </div>
@@ -60,11 +68,14 @@
             <li>share</li>
         </ul>
     </div>
-
-    <main>
+    </main>
 
  
-    <footer></footer>
+    <footer class="flex">
+        <div class="logo">
+            <h1>MeMeGeN</h1>
+        </div> 
+    </footer>
 
     <script src="js/storage-service.js"></script>
     <script src="js/util-service.js"></script>
