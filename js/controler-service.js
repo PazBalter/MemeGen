@@ -1,19 +1,14 @@
 'use strict'
 
 // globals
-const gElCanvas = document.querySelector('#meme-canvas');
-const gCtx = gElCanvas.getContext("2d");
+
 const gElImageWarper = document.querySelector('.images-wrapper')
 const gElGallery = document.querySelector('.gallery-holder')
 const gElMemeGen = document.querySelector('.meme-generator')
 const gLinesAdder = document.querySelector('.lines-adder')
 const gElMyMemes = document.querySelector('.my-meme-holder')
 const gElMemesWarper = document.querySelector('.memes-wrapper')
-
-const textInput = document.querySelector('.line-input');
-const fontButtons = document.querySelectorAll('.font-btn');
-const saveBtn = document.querySelector('.save-meme-btn')
-const downloadBtn = document.querySelector('.download-meme-btn')
+var gNumLines = gMeme.lines.length;
 // const gElInfo = document.querySelector('') // finish
 
 
@@ -114,10 +109,10 @@ function deleteLine(){
 
 // EventListener
 textInput.addEventListener("change", () =>{
-    // setIdxOfLine(0)
     var lineslength = getLinesLength()
     if(lineslength === 0){
         createLine()
+        ++gNumLines
     }
     
     setLine(textInput.value)

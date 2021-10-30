@@ -1,10 +1,16 @@
 'use strict'
 // Globals //
 
-
+const gElCanvas = document.querySelector('#meme-canvas');
+const gCtx = gElCanvas.getContext("2d");
+const textInput = document.querySelector('.line-input');
+const fontButtons = document.querySelectorAll('.font-btn');
+const saveBtn = document.querySelector('.save-meme-btn')
+const downloadBtn = document.querySelector('.download-meme-btn')
+const KEY = 'memes';
 var gSwitch = false;
 var gFontSize = Math.floor(gElCanvas.width/10)
-var gNumLines = gMeme.lines.length;
+
 var gKeywords = {'happy':0,'crazy':0,'sarcastic':0,'sad':0,}
 
 var gImgs = [
@@ -49,7 +55,7 @@ var gMeme = {
     ] 
 }
 var gMemeStorageArray = []
-const KEY = 'memes';
+
 //  getters
 function getLinesLength(){
     var length = gMeme.lines.length
@@ -83,8 +89,11 @@ function setBottomLine(line){
     gMeme.lines[getIdxOfLine()].txt = line
 }
 function setFontSize(diff){
-    gMeme.lines[getIdxOfLine()].size += diff;
-    updateMemeCanvas()
+    if(getLinesLength()>0){
+        gMeme.lines[getIdxOfLine()].size += diff;
+        updateMemeCanvas()
+    }
+    return;
 }
 function setImgId(numId){
     gMeme.selectedImgId = numId
@@ -100,9 +109,9 @@ function createLine(){
         posY: 0 
     })
 }
-
 // storage
 function _saveMemesToStorage() {
-    var memes = saveToStorage(KEY, gMemeStorageArray)
+    // todo remove toggle before saving..
+    var meme = saveToStorage(KEY, gMemeStorageArray)
 }
  
