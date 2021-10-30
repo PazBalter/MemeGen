@@ -273,7 +273,7 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-@media screen and (max-width: 560px){
+@media screen and (max-width: 540px){
     .main-layout{
         margin: 0 auto;
         max-width: 540px
