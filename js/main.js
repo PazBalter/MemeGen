@@ -3,4 +3,5 @@
 function init(){
     updateMemeCanvas()
     renderGalery()
+    renderMemesGalery()
 }

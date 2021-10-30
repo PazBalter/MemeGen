@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/helpers.css">
 
 </head>
 <body onload="init()">
@@ -39,46 +38,51 @@
     
     <div class="meme-generator">
 
-        <div class="canvas-containar">
-            <canvas id="meme-canvas" height="400" width="400"></canvas>
-        </div>
         <div class="control-box">
 
-            <div class="text-inputs">
+        <div class="canvas-containar">
+            <canvas id="meme-canvas" height="450" width="450"></canvas>
+        </div>
+
+            <div class="tools">
+
+            <div class="text-input">
                 <label>Text:</label>
-                <input type="text"  class="textInput">
+                <input type="text"  class="line-input">
             </div>
-            <div>  
+
+            <div class="switch-holder">
+                <h2 class="glass-icon">🔍</h2>
                 <label class="switch">
                     <input type="checkbox" onclick="toggleLineSwitch()">
                     <span class="slider round"></span>
                 </label>
+            </div>
+            
+            <div class="row-buttons-1">  
+                <button class="delete-btn btn" onclick="deleteLine()">🗑️</button>
+                <button class="switch-btn btn" onclick="switchLineFocus()">↑↓</button>
             </div>  
 
-            <div class="tools-btns">
-                <button class="font-btn" onclick="setFontSize(2)">+</button>
-                <button class="font-btn" onclick="setFontSize(-2)">-</button>
-                <button class="switch-btn" onclick="switchLineFocus()">↑↓</button>
-                <button class="delete-btn" onclick="deleteLine()">delete</button>
-                <button class="add-btn" onclick=" addLine()">+line</button>
-                <button class="gallery-btn" onclick="showGallery()">Gallery</button>
-                <button class="save-meme-btn">save</button>
+            <div class="row-buttons-2">
+                <button class="font-btn btn" onclick="setFontSize(2)">+A</button>
+                <button class="font-btn btn" onclick="setFontSize(-2)">-A</button>
+                <button class="switch-btn btn" onclick="textGoDown(2)">↓</button>
+                <button class="switch-btn btn" onclick="textGoUp(-2)">↑</button>
             </div>
 
-        </div>
+            <div class="row-buttons-3">
+                <button class="add-btn btn" onclick=" addLine()">+line</button>
+                <button class="save-meme-btn btn">save</button>
+                <button class="download-btn btn"><a href="#" onclick="downloadCanvas(this)" class="text-decoration">Download</a></button>
+            </div>
 
+            </div>
+        </div>
     </div>
     
-    <div class="share-menu" hidden>
-        <ul>
-            <li>save</li>
-            <li>download</li>
-            <li>share</li>
-        </ul>
-    </div>
     </main>
 
- 
     <footer class="flex">
         <div class="logo">
             <h1>MeMeGeN</h1>

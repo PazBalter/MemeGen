@@ -38,10 +38,11 @@ function renderGalery(){
 function renderMemesGalery(){
     var wrapper = gElMemesWarper;
     var strInnerHtml = '';
-
-    for(var i=0; i < gMemeStorageArray.length ; i++){
+    var memes = loadFromStorage(KEY)
+    if(memes === null){ return;}
+    for(var i=0; i < memes.length ; i++){
         strInnerHtml += `<div class="box">
-                            <img src="${gMemeStorageArray[i]}">
+                            <img src="${memes[i]}">
                         </div>`
     }
     wrapper.innerHTML = strInnerHtml;
@@ -67,5 +68,6 @@ function setImgIdAndGoToMeme(numId){
     gElGallery.style.display = 'none';
     gElMemeGen.style.display = 'block'; 
     gMeme.selectedImgId = numId
-    insertImgToCanvas()
+    // insertImgToCanvas()
+    updateMemeCanvas()
 }

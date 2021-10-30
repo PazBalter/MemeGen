@@ -1,14 +1,15 @@
 'use strict'
 // Globals //
 
-const elCanvas = document.querySelector('#meme-canvas');
-const gCtx = elCanvas.getContext("2d");
-const textInput = document.querySelector('.textInput');
+const gElCanvas = document.querySelector('#meme-canvas');
+const gCtx = gElCanvas.getContext("2d");
+const textInput = document.querySelector('.line-input');
 const fontButtons = document.querySelectorAll('.font-btn');
 const saveBtn = document.querySelector('.save-meme-btn')
-
+const downloadBtn = document.querySelector('.download-meme-btn')
+const KEY = 'memes';
 var gSwitch = false;
-var gFontSize = Math.floor(elCanvas.width/10)
+var gFontSize = Math.floor(gElCanvas.width/10)
 
 var gKeywords = {'happy':0,'crazy':0,'sarcastic':0,'sad':0,}
 
@@ -41,13 +42,15 @@ var gMeme = {
             txt: 'never eat Falafel',
             size: gFontSize,
             align: 'center', 
-            color: 'white' 
+            color: 'white' ,
+            posY: 0
         },
         { 
             txt: 'Without tahini',
             size: gFontSize,
             align: 'center', 
-            color: 'white' 
+            color: 'white',
+            posY: 0
         }
     ] 
 }
@@ -91,18 +94,30 @@ function setFontSize(diff){
 }
 function setImgId(numId){
     gMeme.selectedImgId = numId
-    insertImgToCanvas()
+
+    // insertImgToCanvas()
 }
 function createLine(){
     gMeme.lines.push({ 
         txt: 'New line',
         size: gFontSize,
         align: 'center', 
-        color: 'white' 
+        color: 'white',
+        posY: 0 
     })
 }
 // btn functions
+function textGoDown(diff){
+    var idx = getIdxOfLine()
+    gMeme.lines[idx].posY += diff
+    updateMemeCanvas()
+}
 
+function textGoUp(diff){
+    var idx = getIdxOfLine()
+    gMeme.lines[idx].posY += diff
+    updateMemeCanvas()
+}
 function switchLineFocus(){
     var idx = getIdxOfLine()
     idx++;
@@ -143,37 +158,41 @@ textInput.addEventListener("change", () =>{
 });
 
 saveBtn.addEventListener("click",  () =>{
-    var data = elCanvas.toDataURL();
+    var data = gElCanvas.toDataURL();
     gMemeStorageArray.push(data)
+    _saveMemesToStorage()
     renderMemesGalery()
 });
 
-
-
-
-
+function downloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL();
+    console.log('data', data);
+    elLink.href = data;
+    elLink.download = `yourmeme`;
+}
 function insertImgToCanvas(){
     var img = new Image()
-        img.src = getImgSrc()
+    img.src = getImgSrc()
     img.onload = () => {
-        gCtx.drawImage(img, 0, 0, elCanvas.width, elCanvas.height) 
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height) 
     }
 }
 
 function updateMemeCanvas(){ 
-    var width = elCanvas.width
-    var height = elCanvas.height
+    var width = gElCanvas.width
+    var height = gElCanvas.height
     var yOffset = height/25;
 
     // update canvas img
     var imageObj = new Image();
     imageObj.src = getImgSrc();
     imageObj.onload = function(){
-        gCtx.drawImage(imageObj, 0, 0, elCanvas.width, elCanvas.height) 
+        gCtx.drawImage(imageObj, 0, 0, gElCanvas.width, gElCanvas.height) 
 
         // prepare text
         for(var i = 0 ; i< gMeme.lines.length ; i++){
             var fontSize = gMeme.lines[i].size
+            var txtPos = gMeme.lines[i].posY
             gCtx.strokeStyle = 'black';
             gCtx.lineWidth = Math.floor(fontSize/4);
             gCtx.textAlign = gMeme.lines[i].align;
@@ -184,40 +203,40 @@ function updateMemeCanvas(){
                 if(isSwitchOn() === true){
                     if(i === getIdxOfLine()){
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width*0.05,yOffset-fontSize*0.20,width*0.90,fontSize*1.25)
+                        gCtx.fillRect(width*0.05,yOffset-fontSize*0.20+txtPos,width*0.90,fontSize*1.25)
                     }
                 }
                 // add top text
                 gCtx.fillStyle = gMeme.lines[i].color;
                 gCtx.textBaseline = 'top'
-                gCtx.strokeText(getLine(i),width/2,yOffset)
-                gCtx.fillText(getLine(i),width/2,yOffset)
+                gCtx.strokeText(getLine(i),width/2,yOffset+txtPos)
+                gCtx.fillText(getLine(i),width/2,yOffset+txtPos)
 
             }else if(i === 1){
                 if(isSwitchOn() === true){
                     if(i === getIdxOfLine()){
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width*0.05,height-yOffset-fontSize*1.15,width*0.90,fontSize*1.25)
+                        gCtx.fillRect(width*0.05,height-yOffset-fontSize*1.15+txtPos,width*0.90,fontSize*1.25)
                     }
                 }
                 // add bottom text
                 gCtx.fillStyle = gMeme.lines[i].color;
                 gCtx.textBaseline = 'bottom'
-                gCtx.strokeText(getLine(i),width/2,height - yOffset)
-                gCtx.fillText(getLine(i),width/2,height - yOffset)
+                gCtx.strokeText(getLine(i),width/2,height - yOffset+txtPos)
+                gCtx.fillText(getLine(i),width/2,height - yOffset+txtPos)
             }
             else{
                 if(isSwitchOn() === true){
                     if(i === getIdxOfLine()){
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width*0.05,height/2-fontSize*1.15,width*0.90,fontSize*1.25)
+                        gCtx.fillRect(width*0.05,height/2-fontSize*1.15+txtPos,width*0.90,fontSize*1.25)
                     }
                 }
                 // todo
                 gCtx.fillStyle = gMeme.lines[i].color;
                 gCtx.textBaseline = 'center'
-                gCtx.strokeText(getLine(i),width/2,height/2)
-                gCtx.fillText(getLine(i),width/2,height/2)  
+                gCtx.strokeText(getLine(i),width/2,height/2+txtPos)
+                gCtx.fillText(getLine(i),width/2,height/2+txtPos)  
             }
         }
     }
@@ -237,3 +256,8 @@ function isSwitchOn(){
     return gSwitch;
 }
 
+// storage
+function _saveMemesToStorage() {
+    var memes = saveToStorage(KEY, gMemeStorageArray)
+}
+// 
