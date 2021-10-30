@@ -211,7 +211,7 @@ footer{
     border-radius: 20px;
 
 }
-.glass-icon{
+.switch-icon{
     text-align: center;
 }
 .switch {
@@ -274,15 +274,15 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-@media screen and (max-width: 540px){
+@media screen and (max-width: 480px){
     .main-layout{
         margin: 0 auto;
-        max-width: 400px
+        max-width: 320px;
     }
    
     h1{ 
     font-family: meme;
-    font-size:30px ;
+    font-size: 22px ;
     color: #df00008f;
     }
 
@@ -293,11 +293,11 @@ input:checked + .slider:before {
     header nav .menu-list>* {
 
     font-weight: bold;
-    font-size:20px ;
+    font-size: 17px ;
     width: 100px;
     text-align: center;
     padding-top: 3rem;
-    height: 70px;
+    height: 80px;
     position: relative;
     transition: 0.3s;
     }
@@ -315,9 +315,9 @@ input:checked + .slider:before {
 
     #meme-canvas{
         margin-top: 20px;
-        margin-bottom: 20px;
-        width: 300px;
-        height: 300px;
+        
+        width: 250px;
+        height: 250px;
     }
     .control-box{
         display: flex;
@@ -326,13 +326,24 @@ input:checked + .slider:before {
     }
     .tools{
         display: flex;
-        
         flex-wrap: wrap;
-        flex-direction:row;
-        justify-content: center;
-        
+        flex-direction: row;
+        justify-content: center; 
     }
+    .switch-holder{
+        display: block;
+        margin-bottom: 30px;
+        margin-right: 20px;
+        padding: 5px;
+        background-color: rgb(218, 216, 216);
+        border-radius: 20px;
+
     
+    }
+    .switch-icon{
+        text-align: center;
+        font-size: 15px;
+    }
     .row-buttons-1{
         margin-bottom: 10px;
     }
@@ -344,7 +355,7 @@ input:checked + .slider:before {
     }
     .btn{
         background-color:#feb44b ;
-        font-size: 17px;
+        font-size: 12px;
         padding: 15px;
         border-radius: 20px;
         margin-right: 5px;
@@ -352,14 +363,13 @@ input:checked + .slider:before {
         border-width: 5px;
     }
     .text-input{
-        margin-top: 50px;
-        margin-bottom: 30px;
-        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     .text-input .line-input{
-        font-size: 20px;
-        height: 40px;
-        width: 250px;
+        font-size: 17px;
+        height: 28px;
+        width: 200px;
         position: relative;
     }
     .text-input label{
@@ -387,124 +397,4 @@ input:checked + .slider:before {
     .box{
     padding: 10px;
     }
-}
-
-@media screen and (max-width: 400){
-
-    .main-layout{
-        margin: 0 auto;
-        max-width: 350px
-    }
-   
-    h1{ 
-    font-family: meme;
-    font-size:10px ;
-    color: #df00008f;
-    }
-
-    header {
-    background-color:#feb44b;
-    margin-bottom: 10px;
-    }
-    header nav .menu-list>* {
-
-    font-weight: bold;
-    font-size:20px ;
-    width: 100px;
-    text-align: center;
-    padding-top: 3rem;
-    height: 70px;
-    position: relative;
-    transition: 0.3s;
-    }
-
-    .menu-list>*:hover {
-    font-family: meme;
-    font-size: large;
-    color: #df00008f;
-    cursor: pointer;
-    }
-    
-    .canvas-containar{
-        margin: 0;
-    }
-
-    .meme-generator{
-        display: block;  
-    }
-    #meme-canvas{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: 300px;
-        height: 300px;
-    }
-    .control-box{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    .tools{
-        display: flex;
-        
-        flex-wrap: wrap;
-        flex-direction:row;
-        justify-content: center;
-        
-    }
-    
-    .row-buttons-1{
-        margin-bottom: 10px;
-    }
-    .row-buttons-2{
-        margin-bottom: 10px;
-    }
-    .row-buttons-3{
-        margin-bottom: 10px;
-    }
-    .btn{
-        background-color:#feb44b ;
-        font-size: 17px;
-        padding: 15px;
-        border-radius: 20px;
-        margin-right: 5px;
-        border-color: rgb(218, 216, 216);
-        border-width: 5px;
-    }
-    .text-input{
-        margin-top: 50px;
-        margin-bottom: 30px;
-        margin-right: 20px;
-    }
-    .text-input .line-input{
-        font-size: 20px;
-        height: 40px;
-        width: 250px;
-        position: relative;
-    }
-    .text-input label{
-        font-family: meme;
-        font-size: 25px;
-    }
-    
-    .memes-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(30px,1fr));
-    row-gap: 5px;
-    column-gap: 10px;
-    }
-    .images-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(30px,1fr));
-    /* grid-template-rows: repeat(auto-fit,minmax(100px,1fr)); */
-    row-gap: 5px;
-    column-gap: 10px;
-    }
-    img{
-    width: 100%;
-    border-radius: 20px;
-    }
-    .box{
-    padding: 10px;
-    }
-
 }

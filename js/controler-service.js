@@ -16,6 +16,7 @@ var gNumLines = gMeme.lines.length;
 function addLine(){
     if(gNumLines < 5){
         createLine()
+        setIdxOfLine(gNumLines )
         gNumLines++
         updateMemeCanvas()
     }else{
