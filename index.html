@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body onload="init()">
 
     <header class="header flex-and-space">
@@ -15,78 +17,84 @@
             <h1>MeMeGeN</h1>
         </div>
         <nav class="nav-bar">
-                <ul class="menu-list flex clean-list">
-                    <li onclick="showGallery()">Gallery</li>
-                    <li onclick="showMyMemes()">Memes</li>
-                    <li onclick="showAboutInfo()">About</li>
-                </ul>
+            <ul class="menu-list flex clean-list">
+                <li onclick="showGallery()">Gallery</li>
+                <li onclick="showMyMemes()">Memes</li>
+                <li onclick="showAboutInfo()">About</li>
+            </ul>
         </nav>
     </header>
 
 
     <main class="main-layout">
 
-    <div class="gallery-holder">
-        <div class="images-wrapper">
-        </div>
-    </div>
-
-    <div class="my-meme-holder">
-        <div class="memes-wrapper">
-        </div>
-    </div>
-    
-    <div class="meme-generator">
-
-        <div class="control-box">
-
-        <div class="canvas-containar">
-            <canvas id="meme-canvas" height="450" width="450"></canvas>
-        </div>
-
-            <div class="tools">
-
-            <div class="text-input">
-                <label>Text:</label>
-                <input type="text"  class="line-input">
-            </div>
-
-            <div class="switch-holder">
-                <h2 class="switch-icon">🔦</h2>
-                <label class="switch">
-                    <input type="checkbox" onclick="toggleLineSwitch()">
-                    <span class="slider round"></span>
-                </label> 
-            </div>
-            
-            <div class="row-buttons-1">  
-                <button class="delete-btn btn" onclick="deleteLine()">🗑️</button>
-                <button class="switch-btn btn" onclick="switchLineFocus()">↑↓</button>
-            </div>  
-
-            <div class="row-buttons-2">
-                <button class="font-btn btn" onclick="setFontSize(2)">+A</button>
-                <button class="font-btn btn" onclick="setFontSize(-2)">-A</button>
-                <button class="switch-btn btn" onclick="textGoDown(2)">↓</button>
-                <button class="switch-btn btn" onclick="textGoUp(-2)">↑</button>
-            </div>
-
-            <div class="row-buttons-3">
-                <button class="add-btn btn" onclick=" addLine()">+line</button>
-                <button class="save-meme-btn btn">save</button>
-                <button class="download-btn btn"><a href="#" onclick="downloadCanvas(this)" class="text-decoration">Download</a></button>
-            </div>
-
+        <div class="gallery-holder">
+            <div class="images-wrapper">
             </div>
         </div>
-    </div>
-    
+
+        <div class="my-meme-holder">
+            <div class="memes-wrapper">
+            </div>
+        </div>
+
+        <div class="meme-generator">
+
+            <div class="control-box">
+
+                <div class="canvas-containar">
+                    <canvas id="meme-canvas" height="450" width="450"></canvas>
+                </div>
+
+                <div class="tools">
+
+                    <div class="text-input">
+                        <label>Text:</label>
+                        <input type="text" placeholder="Enter Text" class="line-input" oninput="onHandleChange(event)">
+                    </div>
+
+                    <div class="switch-holder">
+                        <h2 class="switch-icon">🔦</h2>
+                        <label class="switch">
+                            <input type="checkbox" onclick="toggleLineSwitch()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <section class="row-buttons-1">
+                        <button class="delete-btn btn" onclick="deleteLine()">🗑️</button>
+                        <button class="switch-btn btn" onclick="switchLineFocus()">↑↓</button>
+                        <button class="align-left-btn btn" onclick="setAlignment(this)">left</button>
+                        <button class="align-center-btn btn" onclick="setAlignment(this)">center</button>
+                        <button class="align-right-btn btn" onclick="setAlignment(this)">right</button>
+                        <button class="color-btn btn" onclick="deleteLine()">color</button>
+                        <button class="border-color btn" onclick="deleteLine()">border</button>
+                    </section>
+
+                    <section class="row-buttons-2">
+                        <button class="font-btn btn" onclick="setFontSize(2)">+A</button>
+                        <button class="font-btn btn" onclick="setFontSize(-2)">-A</button>
+                        <button class="switch-btn btn" onclick="textGoDown(2)">↓</button>
+                        <button class="switch-btn btn" onclick="textGoUp(-2)">↑</button>
+                    </section>
+
+                    <section class="row-buttons-3">
+                        <button class="add-btn btn" onclick="addLine()">+line</button>
+                        <button class="save-meme-btn btn">save</button>
+                        <button class="download-btn btn"><a href="#" onclick="downloadCanvas(this)"
+                                class="text-decoration">Download</a></button>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="flex">
         <div class="logo">
             <h1>MeMeGeN</h1>
-        </div> 
+        </div>
     </footer>
 
     <script src="js/storage-service.js"></script>
@@ -95,4 +103,5 @@
     <script src="js/meme-service.js"></script>
     <script src="js/controler-service.js"></script>
 </body>
+
 </html>
