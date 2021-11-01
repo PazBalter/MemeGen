@@ -43,14 +43,16 @@ var gMeme = {
             txt: 'never eat Falafel',
             size: gFontSize,
             align: 'center',
-            color: 'white',
+            fillColor: 'white',
+            strokeColor: 'black',
             posY: 0
         },
         {
             txt: 'Without tahini',
             size: gFontSize,
             align: 'center',
-            color: 'white',
+            fillColor: 'white',
+            strokeColor: 'black',
             posY: 0
         }
     ]
@@ -84,6 +86,34 @@ function getFontSize() {
     return gMeme.lines[getIdxOfLine()].size;
 }
 
+function getLineAlign() {
+    return gMeme.lines[getIdxOfLine()].align;
+}
+
+function getStrokeColor() {
+    return gMeme.lines[getIdxOfLine()].fillColor;
+}
+
+function getFillColor() {
+    return gMeme.lines[getIdxOfLine()].strokeColor;
+}
+
+function getXPos(align) {
+    var x
+    switch (align) {
+        case 'center':
+            x = 0;
+            break;
+        case 'left':
+            x = (gElCanvas.width / 2 - 15) * (-1);
+            break;
+        case 'right':
+            x = gElCanvas.width / 2 - 15;
+    }
+    return x;
+}
+
+
 // setters
 function setIdxOfLine(idx) {
     gMeme.selectedLineIdx = idx;
@@ -105,8 +135,19 @@ function setFontSize(diff) {
     return;
 }
 
-function setAlignment(ev) {
-    console.log(ev)
+function setStrokeColor(color) {
+    gMeme.lines[getIdxOfLine()].strokeColor = color;
+    updateMemeCanvas()
+}
+
+function setFillColor(color) {
+    gMeme.lines[getIdxOfLine()].fillColor = color;
+    updateMemeCanvas()
+}
+
+function setAlignment(position) {
+    gMeme.lines[getIdxOfLine()].align = position
+    updateMemeCanvas()
 }
 
 function setImgId(numId) {
@@ -118,7 +159,8 @@ function createLine() {
         txt: 'New line',
         size: gFontSize,
         align: 'center',
-        color: 'white',
+        fillColor: 'white',
+        strokeColor: 'black',
         posY: 0
     })
 }

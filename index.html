@@ -64,11 +64,22 @@
                     <section class="row-buttons-1">
                         <button class="delete-btn btn" onclick="deleteLine()">🗑️</button>
                         <button class="switch-btn btn" onclick="switchLineFocus()">↑↓</button>
-                        <button class="align-left-btn btn" onclick="setAlignment(this)">left</button>
-                        <button class="align-center-btn btn" onclick="setAlignment(this)">center</button>
-                        <button class="align-right-btn btn" onclick="setAlignment(this)">right</button>
-                        <button class="color-btn btn" onclick="deleteLine()">color</button>
-                        <button class="border-color btn" onclick="deleteLine()">border</button>
+                        <button class="align-left-btn btn" onclick="setAlignment('left')">left</button>
+                        <button class="align-center-btn btn" onclick="setAlignment('center')">center</button>
+                        <button class="align-right-btn btn" onclick="setAlignment('right')">right</button>
+
+                        <!-- <div class="div-color">
+                            <input class="fill-color  img-icon" type="image" src="img-icons/paint-board-and-brush.png" />
+                            <input type="color" oninput="setFillColor(this.value)" class="input-color color-stroke" value="#ffffff">
+                        </div> -->
+                        <div class="div-color">
+                            <input class="stroke-color img-icon" type="image" src="img-icons/text stroke.png" />
+                            <input type="color" oninput="setStrokeColor(this.value)" class="input-color color-stroke" value="#ffffff">
+                        </div>
+                        <div class="div-color">
+                            <input class="fill-color  img-icon" type="image" src="img-icons/paint-board-and-brush.png" />
+                            <input type="color" oninput="setFillColor(this.value)" class="input-color color-stroke" value="#ff0000">
+                        </div>
                     </section>
 
                     <section class="row-buttons-2">

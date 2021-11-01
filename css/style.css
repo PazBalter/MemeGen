@@ -1,13 +1,15 @@
 /* basic */
 
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     margin: 0;
     width: 100%;
     background-color: rgb(240, 240, 240);
 }
+
 
 /* TYPOGRAPHY */
 
@@ -15,33 +17,36 @@ body{
     font-family: meme;
     src: url(/font/impact.ttf);
 }
-/* main layout */
 
+
+/* main layout */
 
 .main-layout {
     max-width: 980px;
     margin: 0 auto;
 }
 
+
 /* header */
-.logo{
+
+.logo {
     display: block;
 }
 
-h1{ 
+h1 {
     font-family: meme;
-    font-size:40px ;
+    font-size: 40px;
     color: #df00008f;
 }
 
 header {
-    background-color:#feb44b;
+    background-color: #feb44b;
     margin-bottom: 50px;
 }
-header nav .menu-list>* {
 
+header nav .menu-list>* {
     font-weight: bold;
-    font-size:25px ;
+    font-size: 25px;
     width: 120px;
     text-align: center;
     padding-top: 3.4375rem;
@@ -57,75 +62,91 @@ header nav .menu-list>* {
     color: #df00008f;
     cursor: pointer;
 }
+
 header nav .menu-list {
-    color:#2a1814;
+    color: #2a1814;
     text-decoration: #2a1814;
 }
 
 
-
 /* main */
 
-.meme-generator{
-    display: none;  
+.meme-generator {
+    display: none;
 }
-.control-box{
+
+.control-box {
     display: flex;
 }
-.tools{
+
+.tools {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    flex-direction:column;
-    
+    flex-direction: column;
 }
 
-.text-input{
-
+.text-input {
     margin-top: 60px;
     margin-bottom: 30px;
 }
-.text-input .line-input{
+
+.text-input .line-input {
     font-size: 20px;
     height: 40px;
     width: 250px;
     position: relative;
 }
-.text-input label{
+
+.text-input label {
     font-family: meme;
     font-size: 25px;
 }
 
-.row-buttons-1{
+.row-buttons-1 {
     margin-bottom: 20px;
 }
-.row-buttons-2{
+
+.row-buttons-2 {
     margin-bottom: 20px;
 }
-.row-buttons-3{
+
+.row-buttons-3 {
     margin-bottom: 20px;
 }
-#meme-canvas{
+
+#meme-canvas {
     border: solid 1px black;
 }
-.canvas-containar{
+
+.canvas-containar {
     margin: 60px;
 }
 
-.gallery-holder{
+.gallery-holder {
     display: block;
     border-radius: 3%;
     background-color: #feb34b3d;
 }
-.my-meme-holder{
+
+.my-meme-holder {
     min-height: 570px;
     display: none;
     border-radius: 3%;
     background-color: #feb34b3d;
 }
+
+.control-box input[type='image'] {
+    padding: 10px;
+    background-color: white;
+    height: 50px;
+}
+
+
 /* buttons*/
-.btn{
-    background-color:#feb44b ;
+
+.btn {
+    background-color: #feb44b;
     font-size: 20px;
     padding: 15px;
     border-radius: 20px;
@@ -137,96 +158,105 @@ header nav .menu-list {
 
 /* helpers */
 
-.flex-and-space{
+.flex-and-space {
     display: flex;
     text-align: center;
     justify-content: space-around;
 }
-.text-decoration{
+
+.text-decoration {
     text-decoration: none;
     color: black;
 }
+
 .clean-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
+
 .flex {
     display: flex;
 }
+
+
 /* grid */
 
 .memes-wrapper {
     display: grid;
-    grid-template-columns: repeat(4,minmax(100px,1fr));
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
     row-gap: 5px;
     column-gap: 10px;
 }
+
 .images-wrapper {
     display: grid;
-    grid-template-columns: repeat(4,minmax(100px,1fr));
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
     /* grid-template-rows: repeat(auto-fit,minmax(100px,1fr)); */
     row-gap: 5px;
     column-gap: 10px;
 }
-img{
+
+img {
     width: 100%;
     border-radius: 20px;
 }
-.box{
+
+.box {
     padding: 10px;
 }
 
 
 /* share-menu */
 
-.share-menu{
+.share-menu {
     position: absolute;
     top: 50%;
     left: 50%;
     background-color: grey;
     height: 200px;
     width: 200px;
-    
 }
 
 
 /* footer */
-footer{
+
+footer {
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    background-color:#feb44b;
-    height:95px;
-    
+    background-color: #feb44b;
+    height: 95px;
 }
+
 
 /* switch */
 
-.switch-holder{
+.switch-holder {
     display: block;
     margin-bottom: 30px;
     padding: 5px;
     background-color: rgb(218, 216, 216);
     border-radius: 20px;
-
 }
-.switch-icon{
+
+.switch-icon {
     text-align: center;
 }
+
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
-  
-.switch input { 
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-  
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -238,7 +268,7 @@ footer{
     -webkit-transition: .4s;
     transition: .4s;
 }
-  
+
 .slider:before {
     position: absolute;
     content: "";
@@ -250,111 +280,124 @@ footer{
     -webkit-transition: .4s;
     transition: .4s;
 }
-  
-input:checked + .slider {
+
+input:checked+.slider {
     background-color: #2196F3;
 }
-  
-input:focus + .slider {
+
+input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
 }
-  
-input:checked + .slider:before {
+
+input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-  
+
+
+/* color-input */
+
+.div-color {
+    height: 50px;
+    width: 50px;
+}
+
+.input-color {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.img-icon {
+    height: 40px;
+    width: 40px;
+}
+
+
 /* Rounded sliders */
+
 .slider.round {
     border-radius: 34px;
 }
-  
+
 .slider.round:before {
     border-radius: 50%;
 }
 
-@media screen and (max-width: 480px){
-    .main-layout{
+@media screen and (max-width: 480px) {
+    .main-layout {
         margin: 0 auto;
         max-width: 320px;
     }
-   
-    h1{ 
-    font-family: meme;
-    font-size: 22px ;
-    color: #df00008f;
+    h1 {
+        font-family: meme;
+        font-size: 22px;
+        color: #df00008f;
     }
-
     header {
-    background-color:#feb44b;
-    margin-bottom: 10px;
+        background-color: #feb44b;
+        margin-bottom: 10px;
     }
     header nav .menu-list>* {
-
-    font-weight: bold;
-    font-size: 17px ;
-    width: 100px;
-    text-align: center;
-    padding-top: 3rem;
-    height: 80px;
-    position: relative;
-    transition: 0.3s;
+        font-weight: bold;
+        font-size: 17px;
+        width: 100px;
+        text-align: center;
+        padding-top: 3rem;
+        height: 80px;
+        position: relative;
+        transition: 0.3s;
     }
-
     .menu-list>*:hover {
-    font-family: meme;
-    font-size: large;
-    color: #df00008f;
-    cursor: pointer;
+        font-family: meme;
+        font-size: large;
+        color: #df00008f;
+        cursor: pointer;
     }
-    
-    .canvas-containar{
+    .canvas-containar {
         margin: 0;
     }
-
-    #meme-canvas{
+    #meme-canvas {
         margin-top: 20px;
-        
         width: 250px;
         height: 250px;
     }
-    .control-box{
+    .control-box {
         display: flex;
         align-items: center;
         flex-direction: column;
     }
-    .tools{
+    .tools {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: center; 
+        justify-content: center;
     }
-    .switch-holder{
+    .switch-holder {
         display: block;
         margin-bottom: 30px;
         margin-right: 20px;
         padding: 5px;
         background-color: rgb(218, 216, 216);
         border-radius: 20px;
-
-    
     }
-    .switch-icon{
+    .switch-icon {
         text-align: center;
         font-size: 15px;
     }
-    .row-buttons-1{
+    .row-buttons-1 {
         margin-bottom: 10px;
     }
-    .row-buttons-2{
+    .row-buttons-2 {
         margin-bottom: 10px;
     }
-    .row-buttons-3{
+    .row-buttons-3 {
         margin-bottom: 10px;
     }
-    .btn{
-        background-color:#feb44b ;
+    .btn {
+        background-color: #feb44b;
         font-size: 12px;
         padding: 15px;
         border-radius: 20px;
@@ -362,39 +405,37 @@ input:checked + .slider:before {
         border-color: rgb(218, 216, 216);
         border-width: 5px;
     }
-    .text-input{
+    .text-input {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    .text-input .line-input{
+    .text-input .line-input {
         font-size: 17px;
         height: 28px;
         width: 200px;
         position: relative;
     }
-    .text-input label{
+    .text-input label {
         font-family: meme;
         font-size: 25px;
     }
-    
     .memes-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(50px,1fr));
-    row-gap: 5px;
-    column-gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(50px, 1fr));
+        row-gap: 5px;
+        column-gap: 10px;
     }
     .images-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(50px,1fr));
-
-    row-gap: 5px;
-    column-gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(50px, 1fr));
+        row-gap: 5px;
+        column-gap: 10px;
     }
-    img{
-    width: 100%;
-    border-radius: 20px;
+    img {
+        width: 100%;
+        border-radius: 20px;
     }
-    .box{
-    padding: 10px;
+    .box {
+        padding: 10px;
     }
 }

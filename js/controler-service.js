@@ -9,6 +9,7 @@ const gLinesAdder = document.querySelector('.lines-adder')
 const gElMyMemes = document.querySelector('.my-meme-holder')
 const gElMemesWarper = document.querySelector('.memes-wrapper')
 var gNumLines = gMeme.lines.length;
+
 // const gElInfo = document.querySelector('') // finish
 
 
@@ -95,16 +96,10 @@ function switchLineFocus() {
     var idx = getIdxOfLine()
     idx++;
     setIdxOfLine(idx >= gMeme.lines.length ? 0 : idx)
-        // if (idx >= gMeme.lines.length) {
-        //     setIdxOfLine(0)
-        // } else {
-        //     setIdxOfLine(idx)
-        // }
     updateMemeCanvas()
 }
 
 function deleteLine() {
-
     if (gNumLines) {
         var idx = getIdxOfLine()
         gMeme.lines.splice(idx, 1)
@@ -114,24 +109,19 @@ function deleteLine() {
     } else {
         alert("No lines to delete")
     }
-
 }
 
 // EventListener
 function onHandleChange(ev) {
-    // console.log('ev.target',ev.target);
     var lineslength = getLinesLength()
     if (lineslength === 0) {
         createLine()
             ++gNumLines
     }
-
     setLine(ev.target.value)
     updateMemeCanvas()
 }
-// textInput.addEventListener("change", () =>{
 
-// });
 saveBtn.addEventListener("click", () => {
     var data = gElCanvas.toDataURL();
     gMemeStorageArray.push(data)
@@ -168,50 +158,53 @@ function updateMemeCanvas() {
         // prepare text
         for (var i = 0; i < gMeme.lines.length; i++) {
             var fontSize = gMeme.lines[i].size
-            var txtPos = gMeme.lines[i].posY
-            gCtx.strokeStyle = 'black';
+            var verticalPos = gMeme.lines[i].posY
+            gCtx.strokeStyle = getStrokeColor()
             gCtx.lineWidth = Math.floor(fontSize / 4);
-            gCtx.textAlign = gMeme.lines[i].align;
             gCtx.lineJoin = "round";
             gCtx.font = `${fontSize}px meme`
-
+            gCtx.textAlign = getLineAlign();
+            var x = getXPos(getLineAlign())
             if (i === 0) {
+
                 if (isSwitchOn() === true) {
                     if (i === getIdxOfLine()) {
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width * 0.05, yOffset - fontSize * 0.20 + txtPos, width * 0.90, fontSize * 1.25)
+                        gCtx.fillRect(width * 0.05, yOffset - fontSize * 0.20 + verticalPos, width * 0.90, fontSize * 1.25)
                     }
                 }
                 // add top text
-                gCtx.fillStyle = gMeme.lines[i].color;
+
+                gCtx.fillStyle = getFillColor();
                 gCtx.textBaseline = 'top'
-                gCtx.strokeText(getLine(i), width / 2, yOffset + txtPos)
-                gCtx.fillText(getLine(i), width / 2, yOffset + txtPos)
+                gCtx.strokeText(getLine(i), width / 2 + x, yOffset + verticalPos)
+                gCtx.fillText(getLine(i), width / 2 + x, yOffset + verticalPos)
+
 
             } else if (i === 1) {
                 if (isSwitchOn() === true) {
                     if (i === getIdxOfLine()) {
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width * 0.05, height - yOffset - fontSize * 1.15 + txtPos, width * 0.90, fontSize * 1.25)
+                        gCtx.fillRect(width * 0.05, height - yOffset - fontSize * 1.15 + verticalPos, width * 0.90, fontSize * 1.25)
                     }
                 }
                 // add bottom text
                 gCtx.fillStyle = gMeme.lines[i].color;
                 gCtx.textBaseline = 'bottom'
-                gCtx.strokeText(getLine(i), width / 2, height - yOffset + txtPos)
-                gCtx.fillText(getLine(i), width / 2, height - yOffset + txtPos)
+                gCtx.strokeText(getLine(i), width / 2 + x, height - yOffset + verticalPos)
+                gCtx.fillText(getLine(i), width / 2 + x, height - yOffset + verticalPos)
             } else {
                 if (isSwitchOn() === true) {
                     if (i === getIdxOfLine()) {
                         gCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                        gCtx.fillRect(width * 0.05, height / 2 - fontSize * 1.15 + txtPos, width * 0.90, fontSize * 1.25)
+                        gCtx.fillRect(width * 0.05, height / 2 - fontSize * 1.15 + verticalPos, width * 0.90, fontSize * 1.25)
                     }
                 }
                 // todo
                 gCtx.fillStyle = gMeme.lines[i].color;
                 gCtx.textBaseline = 'center'
-                gCtx.strokeText(getLine(i), width / 2, height / 2 + txtPos)
-                gCtx.fillText(getLine(i), width / 2, height / 2 + txtPos)
+                gCtx.strokeText(getLine(i), width / 2 + x, height / 2 + verticalPos)
+                gCtx.fillText(getLine(i), width / 2 + x, height / 2 + verticalPos)
             }
         }
     }
@@ -220,13 +213,6 @@ function updateMemeCanvas() {
 function toggleLineSwitch() {
     gSwitch = !gSwitch
     updateMemeCanvas()
-        // if (gSwitch === false) {
-        //     gSwitch = true;
-        //     updateMemeCanvas()
-        // } else {
-        //     gSwitch = false
-        //     updateMemeCanvas()
-        // }
 }
 
 function isSwitchOn() {
